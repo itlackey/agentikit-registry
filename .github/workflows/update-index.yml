@@ -1,0 +1,42 @@
+name: Update registry index
+
+on:
+  schedule:
+    - cron: "0 */6 * * *" # every 6 hours
+  workflow_dispatch: # manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Build registry index
+        run: bun run scripts/build-index.ts
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Validate index.json
+        run: |
+          # Ensure the file is valid JSON with expected structure
+          bun -e "
+            const idx = JSON.parse(require('fs').readFileSync('index.json', 'utf8'));
+            if (idx.version !== 1) throw new Error('Invalid version');
+            if (!Array.isArray(idx.kits)) throw new Error('Missing kits array');
+            console.log('Valid index.json with ' + idx.kits.length + ' kits');
+          "
+
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: update registry index"
+          file_pattern: index.json

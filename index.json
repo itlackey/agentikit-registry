@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "updatedAt": "2026-03-09T16:54:01.591Z",
+  "kits": [
+    {
+      "id": "github:msitarzewski/agency-agents",
+      "name": "Agency Agents",
+      "description": "The Agency: AI Specialists Ready to Transform Your Workflow",
+      "ref": "msitarzewski/agency-agents",
+      "source": "github",
+      "homepage": "https://github.com/msitarzewski/agency-agents",
+      "tags": [
+        "agents",
+        "specialist",
+        "agency"
+      ],
+      "assetTypes": [
+        "agents"
+      ],
+      "author": "msitarzewski",
+      "license": "MIT",
+      "curated": true
+    }
+  ]
+}
