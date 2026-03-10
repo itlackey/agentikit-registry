@@ -1,6 +1,6 @@
 # Agent-i-Kit Registry
 
-Static registry index for [agentikit](https://github.com/itlackey/agentikit) kit discovery. Powers `akm search --source registry` by providing a single JSON file that lists all known kits.
+Static registry index for [Agent-i-Kit](https://github.com/itlackey/agentikit) kit discovery. Powers `akm search --source registry` by providing a single JSON file that lists all known kits.
 
 ## How it works
 
