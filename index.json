@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-03-11T18:16:44.161Z",
+  "updatedAt": "2026-03-12T00:14:10.261Z",
   "kits": [
     {
       "id": "github:msitarzewski/agency-agents",
@@ -24,17 +24,21 @@
     {
       "id": "npm:akm-cli",
       "name": "akm-cli",
-      "description": "Placeholder — akm (the Agent-i-Kit) is coming soon. https://github.com/itlackey/agentikit",
+      "description": "CLI tool to search, open, and run extension assets from an akm stash directory.",
       "ref": "akm-cli",
       "source": "npm",
       "homepage": "https://github.com/itlackey/agentikit#readme",
-      "author": "itlackey",
-      "latestVersion": "0.0.0",
+      "author": "GitHub Actions",
+      "latestVersion": "0.0.16",
       "tags": [
         "agent-i-kit",
         "ai-agent",
+        "agent-framework",
+        "developer-tools",
         "cli",
-        "package-manager"
+        "tools",
+        "skills",
+        "commands"
       ],
       "license": "MPL-2.0"
     },
