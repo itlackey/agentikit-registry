@@ -6,22 +6,17 @@
     "ref": "msitarzewski/agency-agents",
     "source": "github",
     "homepage": "https://github.com/msitarzewski/agency-agents",
-    "tags": ["agents", "specialist", "agency"],
-    "assetTypes": ["agents"],
+    "tags": [
+      "agents",
+      "specialist",
+      "agency"
+    ],
+    "assetTypes": [
+      "agent"
+    ],
     "author": "msitarzewski",
-    "license": "MIT"
-  },
-  {
-    "id": "github:anthropics/claude-plugins-official",
-    "name": "Claude Plugins Official",
-    "description": "Official, Anthropic-managed directory of high quality Claude Code Plugins.",
-    "ref": "anthropics/claude-plugins-official",
-    "source": "github",
-    "homepage": "https://github.com/anthropics/claude-plugins-official",
-    "tags": ["claude-code", "mcp", "skills", "plugins"],
-    "assetTypes": ["plugins"],
-    "author": "anthropics",
-    "license": ""
+    "license": "MIT",
+    "curated": true
   },
   {
     "id": "github:microsoft/azure-skills",
@@ -30,10 +25,34 @@
     "ref": "microsoft/azure-skills",
     "source": "github",
     "homepage": "https://github.com/microsoft/azure-skills",
-    "tags": ["azure", "skills", "cloud"],
-    "assetTypes": ["skills"],
+    "tags": [
+      "azure",
+      "skills",
+      "cloud"
+    ],
+    "assetTypes": [
+      "skill"
+    ],
     "author": "microsoft",
-    "license": "MIT"
+    "license": "MIT",
+    "curated": true
+  },
+  {
+    "id": "github:anthropics/claude-plugins-official",
+    "name": "Claude Plugins Official",
+    "description": "Official, Anthropic-managed directory of high quality Claude Code Plugins.",
+    "ref": "anthropics/claude-plugins-official",
+    "source": "github",
+    "homepage": "https://github.com/anthropics/claude-plugins-official",
+    "tags": [
+      "claude-code",
+      "mcp",
+      "skills",
+      "plugins"
+    ],
+    "author": "anthropics",
+    "license": "",
+    "curated": true
   },
   {
     "id": "github:coreyhaines31/marketingskills",
@@ -42,9 +61,17 @@
     "ref": "coreyhaines31/marketingskills",
     "source": "github",
     "homepage": "https://github.com/coreyhaines31/marketingskills",
-    "tags": ["claude", "codex", "marketing", "skills"],
-    "assetTypes": ["skills"],
+    "tags": [
+      "claude",
+      "codex",
+      "marketing",
+      "skills"
+    ],
+    "assetTypes": [
+      "skill"
+    ],
     "author": "coreyhaines31",
-    "license": "MIT"
+    "license": "MIT",
+    "curated": true
   }
 ]

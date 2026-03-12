@@ -22,16 +22,14 @@ jobs:
         run: bun install --frozen-lockfile
 
       - name: Build registry index
-        run: bun run scripts/build-index.ts
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: bun run build
 
       - name: Validate index.json
         run: |
           # Ensure the file is valid JSON with expected structure
           bun -e "
             const idx = JSON.parse(require('fs').readFileSync('index.json', 'utf8'));
-            if (idx.version !== 1) throw new Error('Invalid version');
+            if (idx.version !== 2) throw new Error('Invalid version');
             if (!Array.isArray(idx.kits)) throw new Error('Missing kits array');
             console.log('Valid index.json with ' + idx.kits.length + ' kits');
           "

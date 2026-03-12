@@ -1,52 +1,35 @@
-# Agent-i-Kit (akm) Registry
+# akm Registry
 
-Static registry index for [Agent-i-Kit](https://github.com/itlackey/agentikit) discovery. Powers `akm search --source registry` by providing a single JSON file that lists all known kits.
+Static registry index for [akm](https://github.com/itlackey/agentikit) kit discovery.
+The CLI ships with this registry pre-configured and uses it for `akm registry search`
+and `akm search --source registry`.
 
 ## How it works
 
-The `index.json` file is a static list of kits hosted on GitHub raw. The Agent-i-Kit CLI fetches and caches it locally (1-hour TTL) instead of querying npm and GitHub APIs at search time. This means faster searches, no rate limits, and offline support with a cached index.
+This repo publishes a static `index.json` file. The akm CLI fetches and caches
+that file locally, then searches it for matching kits. Current CLI builds support:
 
-A GitHub Actions workflow rebuilds the index every 6 hours by scanning:
+- Registry index `version: 2`
+- Auto-discovered kits from npm and GitHub
+- Curated manual entries that can override or enrich discovered metadata
+- Optional asset-level metadata via each kit's `assets` array
+- Multiple configured registries via the `registries` config field
 
-- **npm** for packages with `agentikit` or `akm-kit` keywords
-- **GitHub** for repos with the `agentikit` or `akm-kit` topic
-- **manual-entries.json** for curated entries that should always be included
+The build merges three sources:
 
-Results are deduplicated, validated, and committed as `index.json`.
+- npm packages with `agentikit` or `akm-kit` keywords
+- GitHub repos with `agentikit` or `akm-kit` topics
+- `manual-entries.json` for curated additions and overrides
 
-## Getting your kit listed
+## Getting listed
 
-There are three ways to get your kit into the registry.
+There are three ways to get listed:
 
-### Option 1: npm keyword (automatic)
+- Publish an npm package with `agentikit` or `akm-kit` in `keywords`
+- Add the `agentikit` or `akm-kit` GitHub topic to your repository
+- Open a PR updating `manual-entries.json` for curated additions or overrides
 
-Add `agentikit` to your `package.json` keywords:
-
-```json
-{
-  "keywords": ["agentikit", "your-other-keywords"]
-}
-```
-
-Publish to npm and the next index rebuild will pick it up.
-
-### Option 2: GitHub topic (automatic)
-
-Add the `agentikit` or `akm-kit` topic to your GitHub repository (Settings > Topics). The scanner will find it on the next rebuild.
-
-For richer metadata, include a `package.json` at the repo root with `keywords`, `description`, and optionally an `agentikit` field:
-
-```json
-{
-  "agentikit": {
-    "assetTypes": ["skill", "command", "knowledge"]
-  }
-}
-```
-
-### Option 3: Manual entry (PR)
-
-For kits that aren't on npm or don't use the GitHub topic, open a pull request adding your kit to `manual-entries.json`:
+Manual entry example:
 
 ```json
 {
@@ -56,56 +39,65 @@ For kits that aren't on npm or don't use the GitHub topic, open a pull request a
   "ref": "your-org/your-kit",
   "source": "github",
   "homepage": "https://github.com/your-org/your-kit",
-  "tags": ["relevant", "searchable", "keywords"],
-  "assetTypes": ["skill", "tool"],
+  "tags": ["deploy", "review"],
+  "assetTypes": ["script", "skill"],
   "author": "your-name",
   "license": "MIT"
 }
 ```
 
-Required fields: `id`, `name`, `ref`, `source`. Everything else is optional but improves search ranking.
+Required fields: `id`, `name`, `ref`, `source`.
+
+Supported `assetTypes` values match the CLI's current asset model:
+`script`, `skill`, `command`, `agent`, `knowledge`.
 
 ## Index format
 
 ```json
 {
-  "version": 1,
-  "updatedAt": "2026-03-09T00:00:00Z",
+  "version": 2,
+  "updatedAt": "2026-03-12T00:00:00Z",
   "kits": [
     {
-      "id": "github:itlackey/dimm-city-kit",
-      "name": "Dimm City TTRPG Kit",
-      "description": "Agent skills for creaturepunk TTRPG content",
-      "ref": "itlackey/dimm-city-kit",
+      "id": "github:your-org/deploy-kit",
+      "name": "deploy-kit",
+      "description": "Deployment scripts and skills",
+      "ref": "your-org/deploy-kit",
       "source": "github",
-      "tags": ["ttrpg", "creaturepunk"],
-      "assetTypes": ["skill", "command", "knowledge"],
-      "author": "itlackey"
+      "tags": ["deploy", "infrastructure"],
+      "assetTypes": ["script", "skill"],
+      "assets": [
+        {
+          "type": "script",
+          "name": "deploy.sh",
+          "description": "Deploy to production"
+        }
+      ],
+      "author": "your-org",
+      "curated": true
     }
   ]
 }
 ```
 
-The `ref` field is what you'd pass to `akm add`. The full schema is in `registry-index.schema.json`.
+The schema lives at `scripts/registry-index.schema.json`.
 
-## Configuring the CLI
+## Configuring akm
 
-The Agent-i-Kit CLI uses this registry by default. You can override the URL:
+akm uses this registry by default. You can add or override registries with:
 
 ```bash
-# Environment variable (comma-separated for multiple)
+akm registry list
+akm registry add https://your-company.com/registry/index.json --name team
 export AKM_REGISTRY_URL=https://your-company.com/registry/index.json
-
-# Config file
-akm config --set 'registryUrls=["https://your-company.com/registry/index.json"]'
 ```
+
+In config, registries live under the `registries` array.
 
 ## Local development
 
 ```bash
 bun install
-bun run build     # rebuild index.json from npm + GitHub + manual entries
-bun run validate  # check index.json structure
+bun run build
+bun run validate
 ```
-
-Set `GITHUB_TOKEN` to avoid rate limits when running the build script locally.

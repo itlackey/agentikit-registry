@@ -1,11 +1,11 @@
 {
-  "name": "agentikit-registry",
+  "name": "akm-registry",
   "version": "1.0.0",
   "private": true,
-  "description": "Static registry index for agentikit kit discovery",
+  "description": "Static registry index for akm kit discovery",
   "scripts": {
-    "build": "bun run scripts/build-index.ts",
-    "validate": "bun -e \"const idx=JSON.parse(require('fs').readFileSync('index.json','utf8'));if(idx.version!==1)throw new Error('bad version');console.log(idx.kits.length+' kits OK')\""
+    "build": "bun run scripts/build-index.ts --out index.json",
+    "validate": "bun -e \"const idx=JSON.parse(require('fs').readFileSync('index.json','utf8'));if(idx.version!==2)throw new Error('bad version');if(!Array.isArray(idx.kits))throw new Error('missing kits');console.log(idx.kits.length+' kits OK')\""
   },
   "devDependencies": {
     "bun-types": "latest"

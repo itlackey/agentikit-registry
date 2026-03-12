@@ -1,13 +1,13 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Agentikit Registry Index",
+  "title": "akm Registry Index",
   "description": "Static index of discoverable kits for akm search --source registry",
   "type": "object",
   "required": ["version", "updatedAt", "kits"],
   "properties": {
     "version": {
       "type": "integer",
-      "const": 1,
+      "enum": [1, 2],
       "description": "Schema version for forward compatibility"
     },
     "updatedAt": {
@@ -43,7 +43,7 @@
         },
         "source": {
           "type": "string",
-          "enum": ["npm", "github", "git"],
+          "enum": ["npm", "github", "git", "local"],
           "description": "Registry source type"
         },
         "homepage": {
@@ -60,9 +60,14 @@
           "type": "array",
           "items": {
             "type": "string",
-            "enum": ["tool", "skill", "command", "agent", "knowledge", "script"]
+            "enum": ["skill", "command", "agent", "knowledge", "script"]
           },
-          "description": "What kind of stash assets this kit provides"
+          "description": "What kind of stash assets this kit provides."
+        },
+        "assets": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/RegistryAsset" },
+          "description": "Optional detailed asset-level metadata for v2 indexes"
         },
         "author": {
           "type": "string"
@@ -73,6 +78,29 @@
         "latestVersion": {
           "type": "string",
           "description": "Most recent version/tag for display"
+        }
+      }
+    },
+    "RegistryAsset": {
+      "type": "object",
+      "required": ["type", "name"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Asset type (e.g. skill, command, agent, knowledge, script)"
+        },
+        "name": {
+          "type": "string",
+          "description": "Asset name"
+        },
+        "description": {
+          "type": "string",
+          "description": "One-line summary of the asset"
+        },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Searchable keywords for the asset"
         }
       }
     }

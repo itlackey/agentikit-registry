@@ -1,6 +1,6 @@
 {
-  "version": 1,
-  "updatedAt": "2026-03-12T15:31:59.172Z",
+  "version": 2,
+  "updatedAt": "2026-03-12T16:04:16.937Z",
   "kits": [
     {
       "id": "github:msitarzewski/agency-agents",
@@ -15,7 +15,7 @@
         "agency"
       ],
       "assetTypes": [
-        "agents"
+        "agent"
       ],
       "author": "msitarzewski",
       "license": "MIT",
@@ -34,7 +34,7 @@
         "cloud"
       ],
       "assetTypes": [
-        "skills"
+        "skill"
       ],
       "author": "microsoft",
       "license": "MIT",
@@ -51,9 +51,6 @@
         "claude-code",
         "mcp",
         "skills",
-        "plugins"
-      ],
-      "assetTypes": [
         "plugins"
       ],
       "author": "anthropics",
@@ -74,7 +71,7 @@
         "skills"
       ],
       "assetTypes": [
-        "skills"
+        "skill"
       ],
       "author": "coreyhaines31",
       "license": "MIT",
