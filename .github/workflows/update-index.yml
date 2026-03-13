@@ -18,8 +18,8 @@ jobs:
         with:
           bun-version: latest
 
-      - name: Install dependencies
-        run: bun install --frozen-lockfile
+      - name: Install pinned akm-cli
+        run: bun run install:akm
 
       - name: Build registry index
         run: bun run build

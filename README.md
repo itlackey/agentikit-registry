@@ -7,7 +7,8 @@ and `akm search --source registry`.
 ## How it works
 
 This repo publishes a static `index.json` file. The akm CLI fetches and caches
-that file locally, then searches it for matching kits. Current CLI builds support:
+that file locally, then searches it for matching kits. The index is built here by
+a pinned `akm-cli` install via `akm registry build-index`. Current CLI builds support:
 
 - Registry index `version: 2`
 - Auto-discovered kits from npm and GitHub
@@ -82,6 +83,9 @@ Supported `assetTypes` values match the CLI's current asset model:
 
 The schema lives at `scripts/registry-index.schema.json`.
 
+The local wrapper lives at `scripts/build-index.ts`, and the pinned CLI install
+is managed by `scripts/install-akm.ts` using `bun add --exact --no-save`.
+
 ## Configuring akm
 
 akm uses this registry by default. You can add or override registries with:
@@ -97,7 +101,11 @@ In config, registries live under the `registries` array.
 ## Local development
 
 ```bash
-bun install
+bun run install:akm
 bun run build
 bun run validate
 ```
+
+The current pin is `akm-cli@0.0.22`, chosen as the next patch after
+`../agentikit/package.json`'s `0.0.21` while the CLI release for
+`akm registry build-index` is still in flight.
