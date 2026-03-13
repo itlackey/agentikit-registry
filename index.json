@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updatedAt": "2026-03-13T12:12:26.636Z",
+  "updatedAt": "2026-03-13T21:08:55.058Z",
   "kits": [
     {
       "id": "github:msitarzewski/agency-agents",
@@ -55,6 +55,29 @@
       ],
       "author": "anthropics",
       "license": "",
+      "curated": true
+    },
+    {
+      "id": "github:Databasin-AI/agent-plugins",
+      "name": "Databasin Agent Plugins",
+      "description": "Claude Code plugins for Databasin CLI workflows, including slash commands, expert skills, and a pipeline creation agent.",
+      "ref": "Databasin-AI/agent-plugins",
+      "source": "github",
+      "homepage": "https://github.com/Databasin-AI/agent-plugins",
+      "tags": [
+        "claude-code",
+        "plugins",
+        "databasin",
+        "cli",
+        "data-engineering"
+      ],
+      "assetTypes": [
+        "command",
+        "skill",
+        "agent"
+      ],
+      "author": "Databasin-AI",
+      "license": "CC-BY-4.0",
       "curated": true
     },
     {
